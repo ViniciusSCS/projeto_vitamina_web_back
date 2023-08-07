@@ -15,14 +15,16 @@ class CreateSalesOpportunitiesTable extends Migration
     {
         Schema::create('sales_opportunities', function (Blueprint $table) {
             $table->id();
-            $table->string('client');
-            $table->decimal('price', 10, 2);
+            $table->unsignedBigInteger('client_id');
             $table->date('date');
             $table->string('status')->default('Em andamento');
-            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('saller_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
-            $table->foreign('seller_id')->references('id')->on('sellers');
+            $table->foreign('saller_id')->references('id')->on('users');
+            $table->foreign('client_id')->references('id')->on('users');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Laravel\Passport\TokenRepository;
 
 class UserController extends Controller
 {
+    protected $service;
+    protected $tokenRepository;
+
+    public function __construct(UserService $service, TokenRepository $tokenRepository)
+    {
+        $this->service = $service;
+        $this->tokenRepository = $tokenRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function user(Request $request)
     {
-        //
+        $user = $this->service->user($request);
+
+        return ['status' => true, "usuario" => $user];
     }
 
     /**
@@ -21,9 +35,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $user = $this->service->create($data);
+
+        return ['status' => true, "messages" => 'Usuário cadastrado com sucesso', "usuario" => $user];
     }
 
     /**
