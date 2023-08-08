@@ -23,8 +23,15 @@ class UserRepository
 
     public function me($id)
     {
-        $query = User::with('user_type')->where('id', $id)->get();
+        return User::with('user_type')
+            ->where('id', $id)
+            ->get();
+    }
 
-        return $query;
+    public function client()
+    {
+        return User::with('user_type')
+            ->where('user_types_id', 2)
+            ->get();
     }
 }

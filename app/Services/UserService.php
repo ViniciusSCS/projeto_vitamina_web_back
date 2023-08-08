@@ -40,4 +40,9 @@ class UserService
 
         return $query;
     }
+
+    public function client()
+    {
+        return $this->repository->client();
+    }
 }

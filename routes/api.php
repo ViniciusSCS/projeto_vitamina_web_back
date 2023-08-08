@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'user']);
+        Route::get('/clientes', [UserController::class, 'client']);
     });
 
     Route::prefix('product')->group(function () {
