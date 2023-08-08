@@ -23,6 +23,18 @@ class SalesOpportunityService
         return $this->repository->list();
     }
 
+    public function show($id)
+    {
+        $salesOpportunity = $this->repository->find($id);
+
+        $info = ($salesOpportunity == NULL ?
+            ['status' => false, 'message' => 'Oportunidade de Venda não encotrada'] :
+            ['status' => true, 'message' => 'Oportunidade de Venda encontrado', "oportunidade_venda" => $salesOpportunity]
+        );
+
+        return $info;
+    }
+
     public function approve($id)
     {
         return $this->repository->approve($id);
@@ -31,5 +43,16 @@ class SalesOpportunityService
     public function refuse($id)
     {
         return $this->repository->refuse($id);
+    }
+
+    public function update($request, $id)
+    {
+        $data = $request->all();
+
+        $salesOpportunity = $this->repository->find($id);
+
+        $salesOpportunity->update($data);
+
+        return $salesOpportunity;
     }
 }

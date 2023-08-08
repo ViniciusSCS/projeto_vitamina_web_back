@@ -18,11 +18,6 @@ class UserController extends Controller
         $this->tokenRepository = $tokenRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function user(Request $request)
     {
         $user = $this->service->user($request);
@@ -30,11 +25,6 @@ class UserController extends Controller
         return ['status' => true, "usuario" => $user];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(UserRequest $request)
     {
         $data = $request->all();
@@ -51,12 +41,10 @@ class UserController extends Controller
         return ['status' => true, "messages" => 'Usuários encontrados', "usuario" => $user];
     }
 
-
     public function show($id)
     {
         //
     }
-
 
     public function edit($id)
     {

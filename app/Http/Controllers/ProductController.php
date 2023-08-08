@@ -33,6 +33,20 @@ class ProductController extends Controller
     {
         $product = $this->service->list();
 
-        return ['status' => true, "messages" => 'Produtos eencontrados', "produto" => $product];
+        return ['status' => true, "messages" => 'Produtos encontrados', "produto" => $product];
+    }
+
+    public function update(ProductRequest $request, $id)
+    {
+        $product = $this->service->update($request, $id);
+
+        return ['status' => true, "messages" => 'Produto atualizado com sucesso', "produto" => $product];
+    }
+
+    public function edit($id)
+    {
+        $product = $this->service->edit($id);
+
+        return $product;
     }
 }

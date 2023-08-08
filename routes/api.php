@@ -33,11 +33,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('product')->group(function () {
         Route::post('/cadastrar', [ProductController::class, 'create']);
         Route::get('/listar', [ProductController::class, 'list']);
+        Route::get('/editar/{id}', [ProductController::class, 'edit']);
+        Route::put('/atualizar/{id}', [ProductController::class, 'update']);
     });
 
     Route::prefix('sales-opportunity')->group(function () {
         Route::post('/cadastrar', [SalesOpportunityController::class, 'create']);
         Route::get('/listar', [SalesOpportunityController::class, 'list']);
+        Route::get('/visualizar/{id}', [SalesOpportunityController::class, 'show']);
         Route::put('/aprovar/{id}', [SalesOpportunityController::class, 'approve']);
         Route::put('/recusar/{id}', [SalesOpportunityController::class, 'refuse']);
     });

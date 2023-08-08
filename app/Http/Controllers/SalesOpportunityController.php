@@ -48,24 +48,13 @@ class SalesOpportunityController extends Controller
         return ['status' => true, "messages" => 'Oportunidades de vendas encontradas', "oportunidade_venda" => $salesOpportunity];
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function show($id)
     {
-        //
+        $salesOpportunity = $this->service->show($id);
+
+        return $salesOpportunity;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

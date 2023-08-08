@@ -3,9 +3,15 @@
 namespace App\Repository;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository
 {
+    public function find($id)
+    {
+        return Product::find($id);
+    }
+
     public function create($data)
     {
         return Product::create([
@@ -17,6 +23,10 @@ class ProductRepository
 
     public function list()
     {
-        return Product::all();
+        return Product::select(
+            '*',
+            DB::raw("CONCAT('R$ ', price) as price")
+        )
+            ->get();
     }
 }
