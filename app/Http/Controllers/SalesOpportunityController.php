@@ -2,61 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalesOpportunityRequest;
 use Illuminate\Http\Request;
+use App\Services\SalesOpportunityService;
 
 class SalesOpportunityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $service;
+
+    public function __construct(SalesOpportunityService $service)
     {
-        //
+        $this->service = $service;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(SalesOpportunityRequest $request)
     {
-        //
+        $data = $request->all();
+        $user = $request->user();
+
+        $salesOpportunity = $this->service->create($data, $user);
+
+        return ['status' => true, "messages" => 'Oportunidade de venda cadastrada com sucesso', "oportunidade_venda" => $salesOpportunity];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function approve($id)
     {
-        //
+        $salesOpportunityToApprove = $this->service->approve($id);
+
+        return ['status' => true, "messages" => 'Oportunidade de venda aprovado com sucesso', "oportunidade_venda" => $salesOpportunityToApprove];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function refuse($id)
     {
-        //
+        $salesOpportunityToReprove = $this->service->refuse($id);
+
+        return ['status' => true, "messages" => 'Oportunidade de venda reprovado com sucesso', "oportunidade_venda" => $salesOpportunityToReprove];
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function list()
     {
-        //
+        $salesOpportunity = $this->service->list();
+
+        return ['status' => true, "messages" => 'Oportunidades de vendas encontradas', "oportunidade_venda" => $salesOpportunity];
     }
 
     /**

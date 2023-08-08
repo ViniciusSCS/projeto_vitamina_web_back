@@ -17,7 +17,7 @@ class CreateSalesOpportunitiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->date('date');
-            $table->string('status')->default('Em andamento');
+            $table->enum('status', ['Em Andamento', 'Aprovado', 'Recusado'])->default('Em andamento');
             $table->unsignedBigInteger('saller_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();

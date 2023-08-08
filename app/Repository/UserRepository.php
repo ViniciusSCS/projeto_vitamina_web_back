@@ -23,7 +23,7 @@ class UserRepository
 
     public function me($id)
     {
-        $query = User::all();
+        $query = User::with('user_type')->where('id', $id)->get();
 
         return $query;
     }

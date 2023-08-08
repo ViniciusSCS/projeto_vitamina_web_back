@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\{
     AuthenticatorController,
+    ProductController,
+    SalesOpportunityController,
     UserController
 };
 use Illuminate\Support\Facades\Route;
@@ -21,7 +23,21 @@ Route::post('/login', [AuthenticatorController::class, 'login']);
 Route::post('/cadastrar', [UserController::class, 'create']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthenticatorController::class, 'logout']);
+
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'user']);
+    });
+
+    Route::prefix('product')->group(function () {
+        Route::post('/cadastrar', [ProductController::class, 'create']);
+        Route::get('/listar', [ProductController::class, 'list']);
+    });
+
+    Route::prefix('sales-opportunity')->group(function () {
+        Route::post('/cadastrar', [SalesOpportunityController::class, 'create']);
+        Route::get('/listar', [SalesOpportunityController::class, 'list']);
+        Route::put('/aprovar/{id}', [SalesOpportunityController::class, 'approve']);
+        Route::put('/recusar/{id}', [SalesOpportunityController::class, 'refuse']);
     });
 });

@@ -9,10 +9,5 @@ class SalesOpportunity extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client', 'price', 'date', 'status', 'seller_id'];
-
-    public function seller()
-    {
-        return $this->belongsTo(Seller::class);
-    }
+    protected $fillable = ['client_id', 'date', 'status', 'saller_id', 'product_id'];
 }
