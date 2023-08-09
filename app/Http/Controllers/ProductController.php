@@ -49,4 +49,11 @@ class ProductController extends Controller
 
         return $product;
     }
+
+    public function select()
+    {
+        $product = $this->service->select();
+
+        return ['status' => true, "messages" => 'Produto selecionado', "produto" => $product];
+    }
 }

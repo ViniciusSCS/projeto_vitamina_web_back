@@ -11,7 +11,7 @@ class SalesOpportunity extends Model
 
     protected $fillable = ['client_id', 'date', 'status', 'saller_id', 'product_id'];
 
-    public function cliente()
+    public function client()
     {
         return $this->hasOne(User::class, 'id', 'client_id');
     }

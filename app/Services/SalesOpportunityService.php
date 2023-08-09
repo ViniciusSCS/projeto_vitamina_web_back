@@ -23,6 +23,13 @@ class SalesOpportunityService
         return $this->repository->list();
     }
 
+    public function search($request)
+    {
+        // $date = $request->date;
+        // $seller = $request->seller;
+        return $this->repository->search($request);
+    }
+
     public function show($id)
     {
         $salesOpportunity = $this->repository->find($id);

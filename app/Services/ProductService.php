@@ -46,4 +46,9 @@ class ProductService
 
         return $product;
     }
+
+    public function select()
+    {
+        return $this->repository->select();
+    }
 }

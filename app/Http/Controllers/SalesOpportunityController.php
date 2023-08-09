@@ -48,6 +48,13 @@ class SalesOpportunityController extends Controller
         return ['status' => true, "messages" => 'Oportunidades de vendas encontradas', "oportunidade_venda" => $salesOpportunity];
     }
 
+    public function search(Request $request)
+    {
+        $salesOpportunity = $this->service->search($request);
+
+        return ['status' => true, "messages" => 'Oportunidades de vendas encontradas', "oportunidade_venda" => $salesOpportunity];
+    }
+
     public function show($id)
     {
         $salesOpportunity = $this->service->show($id);

@@ -10,7 +10,7 @@ class SalesOpportunityRepository
     public function find($id)
     {
         return SalesOpportunity::with('saller')
-            ->with('cliente')
+            ->with('client')
             ->with('product')
             ->find($id);
     }
@@ -28,13 +28,38 @@ class SalesOpportunityRepository
     public function list()
     {
         return SalesOpportunity::with('saller')
-            ->with('cliente')
+            ->with('client')
             ->with(['product' => function ($query) {
                 $query->select(
                     '*',
                     DB::raw("CONCAT('R$ ', price) as price")
                 );
             }])
+            ->get();
+    }
+
+    public function search($request)
+    {
+        $query = SalesOpportunity::query();
+
+        if ($request->has('date')) {
+            $query->where('date', $request->date);
+        }
+
+        if ($request->has('saller')) {
+            $query->with(['saller' => function ($query, $request) {
+                $query->where('name', 'like', $request->saller);
+            }]);
+        }
+
+        return $query->with('client')
+            ->with(['product' => function ($query) {
+                $query->select(
+                    '*',
+                    DB::raw("CONCAT('R$ ', price) as price")
+                );
+            }])
+            ->with('saller')
             ->get();
     }
 

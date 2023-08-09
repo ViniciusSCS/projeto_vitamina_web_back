@@ -12,6 +12,11 @@ class ProductRepository
         return Product::find($id);
     }
 
+    public function select()
+    {
+        return Product::select('name')->get();
+    }
+
     public function create($data)
     {
         return Product::create([

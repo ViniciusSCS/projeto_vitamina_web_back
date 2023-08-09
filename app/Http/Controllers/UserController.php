@@ -34,30 +34,17 @@ class UserController extends Controller
         return ['status' => true, "messages" => 'Usuário cadastrado com sucesso', "usuario" => $user];
     }
 
-    public function client(Request $request)
+    public function client()
     {
         $user = $this->service->client();
 
-        return ['status' => true, "messages" => 'Usuários encontrados', "usuario" => $user];
+        return ['status' => true, "messages" => 'Usuários encontrados', "clientes" => $user];
     }
 
-    public function show($id)
+    public function selectClient($id)
     {
-        //
-    }
+        $product = $this->service->select();
 
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return ['status' => true, "messages" => 'Produto selecionado', "produto" => $product];
     }
 }
