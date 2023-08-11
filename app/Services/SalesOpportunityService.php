@@ -25,8 +25,6 @@ class SalesOpportunityService
 
     public function search($request)
     {
-        // $date = $request->date;
-        // $seller = $request->seller;
         return $this->repository->search($request);
     }
 
