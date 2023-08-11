@@ -47,9 +47,9 @@ class SalesOpportunityRepository
         }
 
         if ($request->has('saller')) {
-            $query->with(['saller' => function ($query, $request) {
-                $query->where('name', 'LIKE', '%' . $request->saller . '%');
-            }]);
+            $query->whereHas('racsallera', function ($query) use ($request) {
+                $query->where('name', 'LIKE',  '%' . $request->saller . '%');
+            });
         }
 
         return $query->with('client')
