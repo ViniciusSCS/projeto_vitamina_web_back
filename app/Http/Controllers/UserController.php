@@ -10,12 +10,10 @@ use Laravel\Passport\TokenRepository;
 class UserController extends Controller
 {
     protected $service;
-    protected $tokenRepository;
 
-    public function __construct(UserService $service, TokenRepository $tokenRepository)
+    public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->tokenRepository = $tokenRepository;
     }
 
     public function user(Request $request)

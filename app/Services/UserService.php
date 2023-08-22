@@ -8,12 +8,10 @@ use Laravel\Passport\TokenRepository;
 class UserService
 {
     protected $repository;
-    protected $tokenRepository;
 
-    public function __construct(UserRepository $repository, TokenRepository $tokenRepository)
+    public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
-        $this->tokenRepository = $tokenRepository;
     }
 
     public function find($id)

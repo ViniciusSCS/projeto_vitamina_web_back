@@ -10,14 +10,6 @@ use Laravel\Passport\TokenRepository;
 
 class AuthenticatorController extends Controller
 {
-    protected $tokenRepository;
-    protected $service;
-
-    public function __construct(TokenRepository $tokenRepository)
-    {
-        $this->tokenRepository = $tokenRepository;
-    }
-
     public function login(LoginRequest $request)
     {
         $data = $request->all();
